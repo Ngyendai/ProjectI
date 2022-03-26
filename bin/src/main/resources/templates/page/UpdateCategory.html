@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+		<link rel="shortcut icon" type="image/png" href="https://shopgiay.shostweb.com/wp-content/uploads/2021/07/logo-demo-shop-giay.svg"/>
+	<title>Update Category</title>
+</head>
+
+<body>
+
+	
+	<div class="container ">
+
+		
+		<hr>
+		<h2>Cập nhật Category</h2>
+
+		<form action="#" th:action="@{/UpdateCategory}" th:object="${category}" method="POST">
+			<input type="text" th:field="*{categoryId}" name="categoryId" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{categoryName}" name="categoryName"class="form-control mb-4 col-4">
+			<input type="text" th:field="*{categoryDesc}" name="categoryDesc" class="form-control mb-4 col-4">
+			<button type="submit" class="btn btn-info col-2">Cập nhật Category</button>
+		</form>
+		<hr>
+
+	</div>
+</body>
+
+
+</html>

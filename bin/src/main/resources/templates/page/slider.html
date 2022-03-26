@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>GTCoding</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+</head>
+
+<body>
+	<div class="container_slider">
+		<div class="prev-btn"><i class="fas fa-chevron-left"></i></div>
+
+		<div class="slides-container">
+			<div class="slide-image">
+				<img src="https://thienlocstore.com/upload/image/cache/data/banner/realme-q3s-crop-1500-700.jpg" alt="" />
+			</div>
+
+			<div class="slide-image">
+				<img src="https://thienlocstore.com/upload/image/cache/data/banner/bannerthienlocnoel-crop-1500-700.jpg" alt="" />
+			</div>
+
+			<div class="slide-image">
+				<img src="https://thienlocstore.com/upload/image/cache/data/banner/banner-ipad-crop-1500-700.jpg" alt="" />
+			</div>
+		</div>
+
+		<div class="next-btn"><i class="fas fa-chevron-right"></i></div>
+	</div>
+
+	<div class="navigation-dots"></div>
+
+	<script type="text/javascript">
+		const slideImage = document.querySelectorAll(".slide-image");
+		const slidesContainer = document.querySelector(".slides-container");
+		const nextBtn = document.querySelector(".next-btn");
+		const prevBtn = document.querySelector(".prev-btn");
+		const navigationDots = document.querySelector(".navigation-dots");
+
+		let numberOfImages = slideImage.length;
+		let slideWidth = slideImage[0].clientWidth;
+		let currentSlide = 0;
+
+		// Set up the slider
+
+		function init() {
+			/*   
+			  slideImage[0] = 0
+			  slideImage[1] = 100%
+			  slideImage[2] = 200%
+			  */
+
+			slideImage.forEach((img, i) => {
+				img.style.left = i * 100 + "%";
+			});
+
+			slideImage[0].classList.add("active");
+
+			createNavigationDots();
+		}
+
+		init();
+
+		// Create navigation dots
+
+		function createNavigationDots() {
+			for (let i = 0; i < numberOfImages; i++) {
+				const dot = document.createElement("div");
+				dot.classList.add("single-dot");
+				navigationDots.appendChild(dot);
+
+				dot.addEventListener("click", () => {
+					goToSlide(i);
+				});
+			}
+
+			navigationDots.children[0].classList.add("active");
+		}
+
+		// Next Button
+
+		nextBtn.addEventListener("click", () => {
+			if (currentSlide >= numberOfImages - 1) {
+				goToSlide(0);
+				return;
+			}
+
+			currentSlide++;
+			goToSlide(currentSlide);
+		});
+
+		// Previous Button
+
+		prevBtn.addEventListener("click", () => {
+			if (currentSlide <= 0) {
+				goToSlide(numberOfImages - 1);
+				return;
+			}
+
+			currentSlide--;
+			goToSlide(currentSlide);
+		});
+
+		// Go To Slide
+
+		function goToSlide(slideNumber) {
+			slidesContainer.style.transform =
+				"translateX(-" + slideWidth * slideNumber + "px)";
+
+			currentSlide = slideNumber;
+
+			setActiveClass();
+		}
+
+		// Set Active Class
+
+		function setActiveClass() {
+			// Set active class for Slide Image
+
+			let currentActive = document.querySelector(".slide-image.active");
+			currentActive.classList.remove("active");
+			slideImage[currentSlide].classList.add("active");
+
+			//   set active class for navigation dots
+
+			let currentDot = document.querySelector(".single-dot.active");
+			currentDot.classList.remove("active");
+			navigationDots.children[currentSlide].classList.add("active");
+		}
+	</script>
+</body>
+
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" type="image/png"
+		href="https://shopgiay.shostweb.com/wp-content/uploads/2021/07/logo-demo-shop-giay.svg" />
+	<title>Cửa Hàng Điện Thoại TMA</title>
+
+	<style>
+		.button_cart {
+			display: block;
+			width: 100%;
+			padding: 5px 0;
+			height: 30px;
+			background: linear-gradient(90deg, #0162c8, #55e7fc);
+			color: #fff;
+			text-align: center;
+			line-height: 28px;
+		
+
+		}
+	</style>
+
+
+
+</head>
+
+<body>
+	<div class="container_card">
+		<div class="container_card_title">
+			<h1>ĐIỆN THOẠI </h1>
+		</div>
+		<div class="container_card_product">
+			<div class="container_card_product_box" th:each="product : ${products}">
+				<a th:href="@{/{id}(id=${product.productId})}">
+					<img th:src="*{'data:image/jpeg;base64,' + {product.image}}"
+						style="width:150px;height: 140px;;margin-left: 20%;" alt=""
+						class="container_card_product_box_img">
+					<div class="card-body">
+						<p class="card-title"><b>[[*{product.productName}]]</b></p>
+						<p class="card-text">[[*{product.price}]]đ</p>
+
+						<a href="#" class="button_cart">Mua ngay</a>
+					</div>
+				</a>
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+
+</body>
+
+
+</html>

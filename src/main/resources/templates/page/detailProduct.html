@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="shortcut icon" type="image/png"
+		href="https://shopgiay.shostweb.com/wp-content/uploads/2021/07/logo-demo-shop-giay.svg" />
+	<link rel="shortcut icon" type="image/png"
+		href="https://shopgiay.shostweb.com/wp-content/uploads/2021/07/logo-demo-shop-giay.svg" />
+	<title>Cửa Hàng Điện Thoại TMA</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		html {
+			font-size: 65.2%;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		ul li {
+			list-style-type: none;
+		}
+
+		a {
+			text-decoration: none;
+			color: #000;
+		}
+
+		.container_wrapper {
+			width: 100%;
+			height: 50px;
+
+
+		}
+
+		.container_wrapper {
+			width: 90%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin: 10px auto;
+
+		}
+
+		.container_wrapper .container_wrapper_logo img {
+			width: 150px;
+		}
+
+		.container_wrapper nav ul {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+
+
+		.container_wrapper nav ul li a {
+			font-size: 20px;
+			padding: 0 15px;
+
+			display: block;
+			margin-top: 8px
+		}
+
+		.container_wrapper_right {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.container_wrapper_right i {
+			font-size: 20px;
+			margin: 0 10px;
+
+		}
+
+
+
+		.container_slider {
+			width: 100%;
+			overflow: hidden;
+		}
+
+		.slides-container {
+			height: 500px;
+			transition: 900ms cubic-bezier(0.48, 0.15, 0.18, 1);
+			position: relative;
+		}
+
+		.slide-image {
+			height: 100%;
+			width: 100%;
+			position: absolute;
+		}
+
+		.slide-image img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.next-btn,
+		.prev-btn {
+
+			background: #eee;
+			padding: 2px 10px;
+			position: absolute;
+			top: 35%;
+			border-radius: 50%;
+
+			font-size: 20px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+			z-index: 100;
+			cursor: pointer;
+			transition: 400ms;
+		}
+
+		.next-btn:hover,
+		.prev-btn:hover {
+			background: #48f9ff;
+		}
+
+		.prev-btn {
+			left: 10px;
+		}
+
+		.next-btn {
+			right: 10px;
+		}
+
+		/* Navigation Dots */
+
+		.navigation-dots {
+			display: flex;
+			height: 32px;
+			align-items: center;
+			justify-content: center;
+			top: 59%;
+			z-index: 99;
+			left: 48%;
+			position: absolute;
+		}
+
+		.single-dot {
+			background: white;
+			height: 16px;
+			width: 16px;
+			border: 2px solid #000;
+			border-radius: 50%;
+			margin: 0 8px;
+			cursor: pointer;
+			transition: 400ms;
+		}
+
+		.single-dot.active {
+			background: #000;
+		}
+
+
+
+		/*----- PRODUCT -----*/
+
+
+		.container_card {
+			width: 90%;
+			margin: 3% auto;
+		}
+
+
+		.container_card_product {
+			width: 100%;
+
+			margin: 3% 0;
+			display: flex;
+
+			align-items: center;
+			flex-wrap: wrap;
+
+
+
+		}
+
+		.container_card_product_box {
+			width: 250px;
+			border: 1px solid #ddd;
+			margin: 10px 0;
+			transition: all 0.3s ease;
+
+		}
+
+		.container_card_product_box:hover {
+			box-shadow: 1px 2px 2px 8px #eee;
+		}
+
+		.container_card_product_box_img {
+			height: 300px;
+			padding: 10px 0;
+
+		}
+
+		.card-body {
+
+			font-size: 18px;
+		}
+
+		.card-title {
+			text-align: center;
+			height: 40px;
+			padding: 5px 0;
+			font-size: 16px;
+
+
+		}
+
+		.card-text {
+
+			text-align: center;
+			margin: 10px 0;
+		}
+
+		.button_cart,.button_buy {
+			display: block;
+			width: 100%;
+			padding: 5px 0;
+			height: 30px;
+			background:linear-gradient(90deg, #da4453, #89216b);
+			text-align: center;
+			line-height: 15px;
+			font-size: 22px;
+			outline: none;
+			border: 1px solid #da4453;
+			border-radius: 3px;
+			color: #fff;
+
+		}
+		
+		.button_buy{
+			height: 40px;
+			margin-top: 2%;
+		}
+
+		.button_cart a {
+			font-size: 22px;
+		}
+
+
+		/*----------footer--------*/
+		.footer {
+			width: 100%;
+			background-color: #24262b;
+			padding: 20px 0;
+		}
+
+		.container_footer {
+			width: 90%;
+			margin: 0 auto;
+		}
+
+
+		.row {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.footer_col {
+			width: 35%;
+			padding: 0 15px;
+		}
+
+		.footer_col h3 {
+			font-size: 16px;
+			color: #fff;
+			text-transform: capitalize;
+			margin-bottom: 30px;
+			font-weight: 500;
+			position: relative;
+
+		}
+
+		.footer_col h3::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: -10px;
+			background-color: #e91e63;
+			height: 2px;
+			box-sizing: border-box;
+			width: 50px;
+		}
+
+
+		.footer_col ul li:not(:last-child) {
+			margin-bottom: 10px;
+		}
+
+		.footer_col ul li a,
+		.footer_col ul li p {
+			font-size: 16px;
+			text-transform: capitalize;
+
+			font-weight: 300;
+			color: #bbb;
+			display: block;
+			transition: all 0.3s ease;
+		}
+
+		.footer_col ul li p {
+			text-align: left;
+			margin-left: 5%;
+		}
+
+		.footer_col ul li a:hover {
+			color: #fff;
+			padding-left: 8px;
+		}
+
+
+
+
+		.footer_col .social_links a {
+			display: inline-block;
+			height: 40px;
+			width: 40px;
+			background-color: rgba(255, 255, 255, 0.2);
+			margin: 0 10px 10px 0;
+			text-align: center;
+			line-height: 40px;
+			border-radius: 50%;
+			color: #fff;
+			transition: all 0.5s ease;
+			font-size: 20px;
+		}
+
+
+
+		.footer_col .social_links a:hover {
+			color: #24262b;
+			background-color: #fff;
+		}
+
+
+
+
+		/*-- reponsive ---*/
+		@media(max-width:767px) {
+			.footer_col {
+				width: 50%;
+				margin-bottom: 30px;
+			}
+
+		}
+
+
+		@media(max-width:574px) {
+			.footer_col {
+				width: 100%;
+
+			}
+
+		}
+
+
+
+
+
+		.signup-box {
+			width: 360px;
+			height: 620px;
+			margin: auto;
+			background-color: white;
+			border-radius: 3px;
+		}
+
+		.login-box {
+			width: 360px;
+			height: 280px;
+			margin: auto;
+			border-radius: 3px;
+			background-color: white;
+		}
+
+		h1 {
+			text-align: center;
+			padding-top: 15px;
+		}
+
+		h4 {
+			text-align: center;
+		}
+
+		form {
+			width: 300px;
+			margin-left: 20px;
+		}
+
+		form label {
+			display: flex;
+			margin-top: 20px;
+			font-size: 18px;
+		}
+
+		form input {
+			width: 100%;
+			padding: 7px;
+			border: none;
+			border: 1px solid gray;
+			border-radius: 6px;
+			outline: none;
+		}
+
+		.button_login {
+			width: 320px;
+			height: 35px;
+			margin-top: 20px;
+			border: none;
+			background-color: #49c1a2;
+			color: white;
+			font-size: 18px;
+		}
+
+		.button_login p {
+			text-align: center;
+			padding-top: 20px;
+			font-size: 15px;
+		}
+
+		.para-2 {
+			text-align: center;
+			color: white;
+			font-size: 15px;
+			margin-top: -10px;
+		}
+
+		.para-2 a {
+			color: #49c1a2;
+		}
+
+
+
+		.container_product {
+			width: 90%;
+			margin: 5% auto;
+			background-color: white;
+		}
+
+		.container_product_top span {
+			color: red;
+		}
+
+		.container_product_top {
+			margin: 3% 0;
+		}
+
+		.container_product_center_box input {
+			border: none;
+		}
+
+		.container_product_top p {
+			text-align: left;
+			font-size: 22px;
+		}
+
+		.container_product_center {
+			display: flex;
+			width: 100%;
+			margin-bottom: 2%;
+
+		}
+
+		.container_product_center_img {
+			width: 50%;
+			cursor: zoom-in;
+			margin-right: 7%;
+			border: 1px solid #ddd;
+		}
+
+		.container_product_center_box input {
+			width: 500px;
+		}
+
+		.container_product_center_box #name,
+		.container_product_center_box #price {
+			font-size: 22px;
+			margin-left: -2%;
+			font-weight: 600;
+			text-transform: capitalize;
+		}
+
+		.container_product_center_box #price {
+			font-weight: 500;
+			color: crimson;
+		}
+
+		.container_product_center_box #number {
+			width: 50px;
+			border-radius: 0;
+			border: 1px solid #000;
+			margin-top: 5px;
+			font-size: 20px;
+		}
+
+		.container_product_center_box #desc {
+			max-height: 600px;
+			height: 200px;
+			margin-top: 20px;
+			font-size: 18px;
+		}
+
+
+		.container_card_title h1 {
+			text-align: left;
+		}
+
+		.container_product_bottom {
+			height: 400px;
+			overflow: hidden;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:replace="@{/page/header}">...</div>
+
+	<div class="container_product">
+		<div class="container_product_top">
+			<p><a href="home">Trang chủ > > </a><span>Điện thoại</span></p>
+		</div>
+		<div class="container_product_center">
+
+			<form action="#" th:object="${product}" method="POST"
+				class="container_product_center">
+				<div class="container_product_center_img">
+					<img th:src="*{'data:image/jpeg;base64,' + image}"
+						style="width:250px;height: 250px; margin-left: 25%;margin-top: 5%;padding-bottom: 30px;" alt="">
+				</div>
+				<div class="container_product_center_box">
+
+					<input type="text" th:field="*{productName}" name="pname" class="form-control mb-4 col-4" id="name">
+					<input type="text" th:field="*{price}" name="price" class="form-control mb-4 col-4" id="price">
+
+					<label for="number">Số lượng: </label>
+					<input type="number" id="number" name="number" value="1">
+					
+					<button type="submit" class="button_buy">Mua ngay</button>
+				</div>
+			</form>
+		</div>
+		<div class="container_product_bottom">
+			<div class="container_card_title">
+				<h1>SẢN PHẨM LIÊN QUAN</h1>
+			</div>
+			<div class="container_card_product">
+				<div class="container_card_product_box" th:each="product : ${products}">
+					<a th:href="@{/{id}(id=${product.productId})}">
+						<img th:src="*{'data:image/jpeg;base64,' + {product.image}}"
+							style="width:150px;height: 150px;;margin-left: 20%;" alt=""
+							class="container_card_product_box_img">
+						<div class="card-body">
+							<p class="card-title">[[*{product.productName}]]</p>
+							<p class="card-text">[[*{product.price}]]đ</p>
+
+							<a href="#" class="button_cart">Mua ngay</a>
+						</div>
+					</a>
+				</div>
+
+
+
+			</div>
+
+		</div>
+
+
+
+	</div>
+
+
+
+
+
+	<div th:replace="@{/page/footer}">...</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+		integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
